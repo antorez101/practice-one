@@ -6,34 +6,31 @@ on: push
 jobs:
   # Give a name to the job
   lint:
-    # Specify the VM where the job will run
     runs-on: ubuntu-latest
-    # Define the steps to be executed in the current job
     steps:
-      # Step to clone the code in this vm running machine
-      - name: Clone-repo-step
-        # for each step we can use runner 'uses' or execute a command 'run'
-        # we are going to use 'actions/checkout@v3'
+      - name: get code
         uses: actions/checkout@v3
-        # Step to install nodejs dependencies
-      - name: Install dependencies
-        # we use 'run' to run commands in this case run the nodejs command to install nodejs
+      - name: install dependencies
         run: npm ci
-        # Step to run Lint
-      - name: Lint
-        run: npm run lint
-        # Step to execute tests
-      - name: Test
+      - name: lint
+        run: npm run lint  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: tests
         run: npm run test
-        # Step to build the code
-      - name: Build
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: get dependencies
+        run: npm ci
+      - name: build
         run: npm run build
-        # Step to simulate deployment
-      - name: Deployment
-        run: echo "Deploying app ..."
-
-
-
-        
-
-
+      - name: deploy
+        run: echo "Deploying app in steps"
