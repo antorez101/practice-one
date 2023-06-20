@@ -13,7 +13,7 @@ jobs:
       # Step to clone the code in this vm running machine
       - name: Clone-repo-step
         # for each step we can use runner 'uses' or execute a command 'run'
-        # we are going to use 'actions/checkout@v3'
+        # we are going to use the third party github action 'actions/checkout@v3'
         uses: actions/checkout@v3
         # Step to install nodejs dependencies
       - name: Install dependencies
